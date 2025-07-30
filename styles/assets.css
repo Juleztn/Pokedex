@@ -1,16 +1,30 @@
 header {
     padding: 32px;
     display: flex;
+    position: fixed;
+    top: 0;
+    width: -webkit-fill-available;
     align-items: center;
-    gap: 24px;
+    justify-content: space-between;
     background-color: #1c0202;
     color: white;
+}
+
+input {
+    border-radius: 8px;
+    border: none;
+    padding: 4px 8px;
+    width: 150px;
+}
+
+input:focus {
+    outline: none;
 }
 
 footer {
     padding: 32px;
     background-color: #1c0202;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: -webkit-fill-available;
     display: flex;
