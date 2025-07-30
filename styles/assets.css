@@ -1,0 +1,33 @@
+header {
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background-color: #1c0202;
+    color: white;
+}
+
+footer {
+    padding: 32px;
+    background-color: #1c0202;
+    position: absolute;
+    bottom: 0;
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pokeball {
+    width: 48px;
+}

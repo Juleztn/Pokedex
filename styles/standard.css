@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    scroll-behavior: smooth;
+    font-family: 'Asap Condensed';
+}
+
+body {
+    max-width: 1920px;
+    margin: auto;
+    background-color: #260202;
+}
