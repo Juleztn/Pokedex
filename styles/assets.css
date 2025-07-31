@@ -1,8 +1,6 @@
 header {
     padding: 32px;
     display: flex;
-    position: fixed;
-    top: 0;
     width: -webkit-fill-available;
     align-items: center;
     justify-content: space-between;
@@ -24,8 +22,6 @@ input:focus {
 footer {
     padding: 32px;
     background-color: #1c0202;
-    position: fixed;
-    bottom: 0;
     width: -webkit-fill-available;
     display: flex;
     justify-content: center;
@@ -44,4 +40,36 @@ a:hover {
 
 .pokeball {
     width: 48px;
+}
+
+button {
+    padding: 10px 24px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #1C0202;
+    color: white;
+    font-size: 16px;
+}
+
+button:hover {
+    transform: scale(1.02);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.d_none {
+    display: none;
 }
