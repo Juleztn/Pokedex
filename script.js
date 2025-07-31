@@ -1,5 +1,9 @@
 const pokemonRef = document.getElementById('pokemon');
 const pokemonImg = document.getElementsByClassName('pokemon-img');
+const pokemonTypeRef = document.getElementsByClassName('pokemon-type');
+let pokemonArr = [];
+let pokemonJson;
+let pokemonTypeJson;
 
 function init() {
     getPokemonApi();
@@ -8,21 +12,25 @@ function init() {
 async function getPokemonApi() {
     for (let index = 1; index <= 20; index++) {
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${index}/`);
-        let pokemonJson = await pokemon.json();
-        console.log(pokemonJson);
-        renderPokemon(pokemonJson);
+        pokemonJson = await pokemon.json();
+        pokemonArr.push(pokemonJson);
+    }
+    console.log(pokemonArr);
+    renderPokemon();
+}
+
+async function renderPokemon() {
+    for (let i = 0; i < pokemonArr.length; i++) {
+        pokemonRef.innerHTML += showFirstTwentyPokemon(pokemonArr, i);
+        showPokemonType(i);
     }
 }
 
-function renderPokemon(pokemonJson) {
-    pokemonRef.innerHTML += showFirstTwentyPokemon(pokemonJson);
-}
-
-async function showPokemonType(pokemonJson) {
-    for (let i = 0; i < pokemonJson.types.length; i++) {
-        let pokemonType = await fetch(`${pokemonJson.types[i].type.url}`);
-        let pokemonTypeJson = await pokemonType.json();
-        let imgSrc = pokemonTypeJson.sprites['generation-viii']['sword-shield'].name_icon;
-        renderPokemonType(imgSrc);
+async function showPokemonType(index) {
+    for (let i = 0; i < pokemonArr[index].types.length; i++) {
+        let pokemonType = await fetch(`${pokemonArr[index].types[i].type.url}`);
+        pokemonTypeJson = await pokemonType.json();
+        let imgSrc = await pokemonTypeJson.sprites['generation-viii']['sword-shield'].name_icon;
+        pokemonTypeRef[index].innerHTML += renderPokemonType(imgSrc);
     }
 }
