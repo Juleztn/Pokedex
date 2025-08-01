@@ -17,3 +17,59 @@
 .normal {
     background-color: #4f4f4f;
 }
+
+.poison {
+    background-color: #520073;
+}
+
+.fairy {
+    background-color: #a1009b;
+}
+
+.electric {
+    background-color: #8c8500;
+}
+
+.ground {
+    background-color: #5c2c00;
+}
+
+.fighting {
+    background-color: #4d012d;
+}
+
+.psychic {
+    background-color: #a10239;
+}
+
+.rock {
+    background-color: #826851;
+}
+
+.ghost {
+    background-color: #497c85;
+}
+
+.flying {
+    background-color: #6bb3bf;
+}
+
+.steel {
+    background-color: #3f4445;
+}
+
+.ice {
+    background-color: #94efff;
+}
+
+.dragon {
+    background-color: #330507;
+}
+
+.dark {
+    background-color: #0f0f0f;
+}
+
+.stellar {
+    background-color: #359689;
+}

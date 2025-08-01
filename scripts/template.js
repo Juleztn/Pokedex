@@ -1,4 +1,4 @@
-function showFirstTwentyPokemon(pokemonArr, i) {
+function showPokemon(pokemonArr, i) {
     return `
         <div class="pokemon-card ${pokemonArr[i].types[0].type.name}">
             <h3>${pokemonArr[i].name.charAt(0).toUpperCase() + pokemonArr[i].name.slice(1)}</h3>
