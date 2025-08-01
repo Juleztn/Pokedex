@@ -3,6 +3,7 @@ let pokemonCards = document.getElementsByClassName('pokemon-card');
 const pokemonImg = document.getElementsByClassName('pokemon-img');
 const pokemonTypeRef = document.getElementsByClassName('pokemon-type');
 const loadingScreenRef = document.getElementById('loading-screen');
+const btn = document.getElementById('btn');
 let input = document.getElementById('search-input');
 let pokemonArr = [];
 let pokemonNames = [];
@@ -24,7 +25,7 @@ async function getPokemonApi() {
         pokemonArr.push(pokemonJson);
         pokemonNames.push(pokemonJson.name);
     }
-    console.log(pokemonNames);
+    console.log(pokemonArr);
     hideLoadingScreen();
     renderPokemon();
 }
@@ -60,16 +61,31 @@ function hideLoadingScreen() {
 
 function filterPokemon() {
     if (input.value.length >= 3) {
-        let filter, a, txtValue;
-        filter = input.value.toUpperCase();
-        for (let i = 0; i < pokemonNames.length; i++) {
-            a = pokemonCards[i].getElementsByTagName("h3")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                pokemonCards[i].style.display = "";
-            } else {
-                pokemonCards[i].style.display = "none";
-            }
+        filterAndShowPokemon();
+    } else if (input.value == "") {
+        showAllPokemon();
+    }
+}
+
+function filterAndShowPokemon() {
+    let filter, a, txtValue;
+    filter = input.value.toUpperCase();
+    for (let i = 0; i < pokemonNames.length; i++) {
+        a = pokemonCards[i].getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            pokemonCards[i].style.display = "";
+        } else {
+            pokemonCards[i].style.display = "none";
         }
     }
+    btn.classList.add('d_none');
+}
+
+function showAllPokemon() {
+    btn.classList.remove('d_none');
+    pokemonIndex = 0;
+    pokemonAmount = pokemonArr.length;
+    pokemonRef.innerHTML = "";
+    renderPokemon();
 }

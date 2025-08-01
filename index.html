@@ -23,7 +23,7 @@
         </div>
         <div class="search-pokemon">
             <img class="search" src="./img/lupe.svg" alt="Lupe">
-            <input id="search-input" oninput="filterPokemon()" type="text">
+            <input id="search-input" onkeyup="filterPokemon()" type="text">
         </div>
     </header>
 
@@ -35,7 +35,7 @@
             <img class="loading-gif" src="./img/loading.gif">
         </div>
         <div class="loading-button">
-            <button onclick="showMorePokemon()">Mehr laden</button>
+            <button id="btn" onclick="showMorePokemon()">Mehr laden</button>
         </div>
     </section>
 

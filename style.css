@@ -16,6 +16,7 @@
 
 .pokemon {
     padding: 32px 40px;
+    min-height: calc(100vh - 288px);
 }
 
 #pokemon {
