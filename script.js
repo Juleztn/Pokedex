@@ -2,13 +2,20 @@ const pokemonRef = document.getElementById('pokemon');
 let pokemonCards = document.getElementsByClassName('pokemon-card');
 const pokemonImg = document.getElementsByClassName('pokemon-img');
 const pokemonTypeRef = document.getElementsByClassName('pokemon-type');
+const pokemonTypeDialogRef = document.getElementsByClassName('pokemon-type-dialog');
+const pokemonAbilitiesRef = document.getElementsByClassName('abilities');
 const loadingScreenRef = document.getElementById('loading-screen');
 const btn = document.getElementById('btn');
+const dialog = document.getElementById('dialog');
+const overlay = document.getElementById('overlay');
 let input = document.getElementById('search-input');
 let pokemonArr = [];
 let pokemonNames = [];
 let pokemonJson;
 let pokemonTypeJson;
+let pokemonTypeJsonDialog;
+let weight;
+let pokemonAbilities;
 let pokemonStartAmount = 1;
 let pokemonAmount = 20;
 let pokemonIndex = 0;
@@ -88,4 +95,43 @@ function showAllPokemon() {
     pokemonAmount = pokemonArr.length;
     pokemonRef.innerHTML = "";
     renderPokemon();
+}
+
+function openPokemonDialog(i) {
+    dialog.show();
+    getWeightOfPokemon(i);
+    dialog.innerHTML = showClickedPokemon(i, weight);
+    overlay.classList.toggle('d_none');
+    getPokemonTypeForDialog(i);
+    getAbilityofPokemon(i);
+}
+
+function getWeightOfPokemon(i) {
+    let number = pokemonArr[i].weight.toString();
+    weight = `${number[0]},${number.slice(1)} kg`;
+}
+
+function getAbilityofPokemon(i) {
+    for (let index = 0; index < pokemonArr[i].abilities.length; index++) {
+        pokemonAbilities = pokemonArr[i].abilities[index].ability.name;
+        if (index < pokemonArr[i].abilities.length - 1) {
+            pokemonAbilitiesRef[0].innerHTML += `${pokemonAbilities},` + ' ';
+        } else {
+            pokemonAbilitiesRef[0].innerHTML += `${pokemonAbilities}`;
+        }
+    }
+}
+
+function toggleOverlay() {
+    overlay.classList.toggle('d_none');
+    dialog.close();
+}
+
+async function getPokemonTypeForDialog(index) {
+    for (let i = 0; i < pokemonArr[index].types.length; i++) {
+        let pokemonTypeDialog = await fetch(`${pokemonArr[index].types[i].type.url}`);
+        pokemonTypeJsonDialog = await pokemonTypeDialog.json();
+        let imgSrcDialog = await pokemonTypeJsonDialog.sprites['generation-viii']['sword-shield'].name_icon;
+        pokemonTypeDialogRef[0].innerHTML += showPokemonTypeDialog(imgSrcDialog);
+    }
 }

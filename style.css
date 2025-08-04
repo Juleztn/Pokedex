@@ -92,3 +92,66 @@
     align-items: center;
     padding-top: 40px;
 }
+
+#dialog {
+    margin: auto;
+    position: fixed;
+    top: 20%;
+    z-index: 3;
+    outline: none;
+    border: none;
+    padding: 0;
+    border-radius: 18px;
+}
+
+.pokemon-dialog {
+    border-radius: 16px;
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: white;
+    width: 400px;
+}
+
+.types-dialog img {
+    width: 150px;
+}
+
+.pokemon-type-dialog {
+    display: flex;
+    gap: 8px;
+}
+
+.pokemon-info {
+    display: flex;
+    width: -webkit-fill-available;
+    font-size: 20px;
+}
+
+.pokemon-info span {
+    cursor: pointer;
+    padding: 8px 16px 8px 16px;
+    width: 33%;
+    text-align: center;
+}
+
+.underline {
+    border-bottom: solid 4px #cccccc;
+}
+
+.main-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.pokemon-details {
+    width: -webkit-fill-available;
+}
+
+.single-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 64px;
+}
