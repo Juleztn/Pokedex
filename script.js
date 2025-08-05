@@ -9,6 +9,10 @@ const btn = document.getElementById('btn');
 const dialog = document.getElementById('dialog');
 const overlay = document.getElementById('overlay');
 let input = document.getElementById('search-input');
+let mainInfos = document.getElementsByClassName('main');
+let stats = document.getElementsByClassName('stats');
+let evoChain = document.getElementsByClassName('evo-chain');
+let pokemonDetails = document.getElementsByClassName('pokemon-details');
 let pokemonArr = [];
 let pokemonNames = [];
 let pokemonJson;
@@ -21,7 +25,7 @@ let pokemonAmount = 20;
 let pokemonIndex = 0;
 
 function init() {
-    getPokemonApi();
+    getPokemonApi();    
 }
 
 async function getPokemonApi() {
@@ -60,10 +64,12 @@ async function showMorePokemon() {
 
 function showLoadingScreen() {
     loadingScreenRef.classList.remove('d_none');
+    btn.classList.add('d_none');
 }
 
 function hideLoadingScreen() {
     loadingScreenRef.classList.add('d_none');
+    btn.classList.remove('d_none');
 }
 
 function filterPokemon() {
@@ -115,7 +121,7 @@ function getAbilityofPokemon(i) {
     for (let index = 0; index < pokemonArr[i].abilities.length; index++) {
         pokemonAbilities = pokemonArr[i].abilities[index].ability.name;
         if (index < pokemonArr[i].abilities.length - 1) {
-            pokemonAbilitiesRef[0].innerHTML += `${pokemonAbilities},` + ' ';
+            pokemonAbilitiesRef[0].innerHTML += `${pokemonAbilities},` + '\xa0\xa0\xa0\xa0';
         } else {
             pokemonAbilitiesRef[0].innerHTML += `${pokemonAbilities}`;
         }
@@ -134,4 +140,25 @@ async function getPokemonTypeForDialog(index) {
         let imgSrcDialog = await pokemonTypeJsonDialog.sprites['generation-viii']['sword-shield'].name_icon;
         pokemonTypeDialogRef[0].innerHTML += showPokemonTypeDialog(imgSrcDialog);
     }
+}
+
+function showMainInfos(i) {
+    mainInfos[0].classList.add('underline');
+    stats[0].classList.remove('underline');
+    evoChain[0].classList.remove('underline');
+    pokemonDetails[0].innerHTML = showMainInfosHtml(i);
+    getAbilityofPokemon(i);
+}
+
+function showStats(i) {
+    stats[0].classList.add('underline');
+    mainInfos[0].classList.remove('underline');
+    evoChain[0].classList.remove('underline');
+    pokemonDetails[0].innerHTML = showStatsHtml(i);
+}
+
+function showEvoChain(i) {
+    evoChain[0].classList.add('underline');
+    stats[0].classList.remove('underline');
+    mainInfos[0].classList.remove('underline');
 }

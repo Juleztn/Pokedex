@@ -112,7 +112,7 @@
     align-items: center;
     gap: 16px;
     color: white;
-    width: 400px;
+    width: 450px;
 }
 
 .types-dialog img {
@@ -138,6 +138,10 @@
 }
 
 .underline {
+    border-bottom: solid 4px #85030d;
+}
+
+.info:hover {
     border-bottom: solid 4px #cccccc;
 }
 
@@ -154,4 +158,32 @@
     display: flex;
     justify-content: space-between;
     padding: 8px 64px;
+}
+
+.base-stat {
+    background-color: #99020e;
+    border-radius: 16px;
+    height: 24px;
+    padding-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.stat-width {
+    width: 300px;
+    height: 24px;
+    background-color: rgb(26, 25, 25);
+    border-radius: 16px;
+}
+
+.single-stat {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 16px;
 }
