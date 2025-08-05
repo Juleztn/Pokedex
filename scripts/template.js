@@ -125,3 +125,9 @@ function showMainInfosHtml(i) {
         </div>
     `;
 }
+
+function showEvoChainHtml(json) {
+    return `
+        <img src="${json.sprites.other['official-artwork'].front_default}">
+    `;
+}

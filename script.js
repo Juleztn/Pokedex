@@ -23,9 +23,10 @@ let pokemonAbilities;
 let pokemonStartAmount = 1;
 let pokemonAmount = 20;
 let pokemonIndex = 0;
+let json;
 
 function init() {
-    getPokemonApi();    
+    getPokemonApi();
 }
 
 async function getPokemonApi() {
@@ -161,4 +162,17 @@ function showEvoChain(i) {
     evoChain[0].classList.add('underline');
     stats[0].classList.remove('underline');
     mainInfos[0].classList.remove('underline');
+    getEvolutionChain(i);
+}
+
+async function getEvolutionChain(i) {
+    let pokemonSpecies = await fetch(pokemonArr[i].species.url);
+    let pokemonSpeciesJson = await pokemonSpecies.json();
+    let pokemonEvo = await fetch(pokemonSpeciesJson.evolution_chain.url);
+    let pokemonEvoJson = await pokemonEvo.json();
+    let pokemonEvoImg = pokemonEvoJson.chain.species.name;
+    let imgUrl = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonEvoImg}/`);
+    json = await imgUrl.json();
+    console.log(json);
+    pokemonDetails[0].innerHTML = showEvoChainHtml(json);
 }
