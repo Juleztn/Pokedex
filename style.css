@@ -148,10 +148,13 @@
 .main-info {
     display: flex;
     flex-direction: column;
+    height: 240px;
+    justify-content: space-evenly;
 }
 
 .pokemon-details {
     width: -webkit-fill-available;
+    height: 240px;
 }
 
 .single-info {
@@ -186,4 +189,90 @@
     flex-direction: column;
     gap: 16px;
     padding: 8px 16px;
+}
+
+.evo-chain-images {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 240px;
+}
+
+.evo-img {
+    width: 88px;
+    height: 88px;
+}
+
+.right-arrow {
+    width: 64px;
+}
+
+.one-evo-img {
+    width: 130px;
+}
+
+.evo-chain-one {
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.two-evo-img {
+    width: 120px;
+}
+
+.arrows {
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.arrows-img {
+    width: 48px;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.arrows-img:hover {
+    background-color: #363636;
+}
+
+.impressum {
+    color: white;
+    margin: 32px;
+}
+
+.impressum-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.impressum-title h1 {
+    margin: 0;
+}
+
+.personal-info {
+    margin: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.back-btn {
+    padding: 16px 20px;
+    border: none;
+    background-color: #1C0202;
+    color: white;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.back-btn:hover {
+    transform: scale(1.05);
 }

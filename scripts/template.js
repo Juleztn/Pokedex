@@ -48,6 +48,10 @@ function showClickedPokemon(i, weight) {
                     </div>
                 </div>
             </div>
+            <div class="arrows">
+                <img onclick="previousPokemon(${i})" class="arrows-img ${pokemonArr[i].types[0].type.name}-hover" src="./img/angle-left-white.svg">
+                <img onclick="nextPokemon(${i})" class="arrows-img ${pokemonArr[i].types[0].type.name}-hover" src="./img/angle-right-white.svg">
+            </div>
         </div>
     `;
 }
@@ -126,8 +130,32 @@ function showMainInfosHtml(i) {
     `;
 }
 
-function showEvoChainHtml(json) {
+function showEvoChainWithOnePokemon(firstPokemonOfEvoJson) {
     return `
-        <img src="${json.sprites.other['official-artwork'].front_default}">
+        <div class="evo-chain-one">
+            <img class="one-evo-img" src="${firstPokemonOfEvoJson.sprites.other['official-artwork'].front_default}">
+        </div>
+    `;
+}
+
+function showEvoChainWithTwoPokemon(firstPokemonOfEvoJson, secondPokemonOfEvoJson) {
+    return `
+        <div class="evo-chain-images">
+            <img class="two-evo-img" src="${firstPokemonOfEvoJson.sprites.other['official-artwork'].front_default}">
+            <img class="right-arrow" src="./img/arrow-right.svg">
+            <img class="two-evo-img" src="${secondPokemonOfEvoJson.sprites.other['official-artwork'].front_default}">
+        </div>
+    `;
+}
+
+function showEvoChainWithThreePokemon(firstPokemonOfEvoJson, secondPokemonOfEvoJson, thridPokemonOfEvoJson) {
+    return `
+        <div class="evo-chain-images">
+            <img class="evo-img" src="${firstPokemonOfEvoJson.sprites.other['official-artwork'].front_default}">
+            <img class="right-arrow" src="./img/arrow-right.svg">
+            <img class="evo-img" src="${secondPokemonOfEvoJson.sprites.other['official-artwork'].front_default}">
+            <img class="right-arrow" src="./img/arrow-right.svg">
+            <img class="evo-img" src="${thridPokemonOfEvoJson.sprites.other['official-artwork'].front_default}">
+        </div>
     `;
 }

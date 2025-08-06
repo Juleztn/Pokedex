@@ -6,11 +6,19 @@
     background-color: #012104;
 }
 
+.grass-hover:hover {
+    background-color: #012104;
+}
+
 .fire {
     background-color: #570303;
 }
 
 .fire-info {
+    background-color: #380202;
+}
+
+.fire-hover:hover {
     background-color: #380202;
 }
 
@@ -22,11 +30,19 @@
     background-color: #011d3d;
 }
 
+.water-hover:hover {
+    background-color: #011d3d;
+}
+
 .bug {
     background-color: #325702;
 }
 
 .bug-info {
+    background-color: #1d3301;
+}
+
+.bug-hover:hover {
     background-color: #1d3301;
 }
 
@@ -38,11 +54,19 @@
     background-color: #333333;
 }
 
+.normal-hover:hover {
+    background-color: #333333;
+}
+
 .poison {
     background-color: #520073;
 }
 
 .poison-info {
+    background-color: #39014f;
+}
+
+.poison-hover:hover {
     background-color: #39014f;
 }
 
@@ -54,11 +78,19 @@
     background-color: #780173;
 }
 
+.fairy-hover:hover {
+    background-color: #780173;
+}
+
 .electric {
     background-color: #8c8500;
 }
 
 .electric-info {
+    background-color: #524e01;
+}
+
+.electric-hover:hover {
     background-color: #524e01;
 }
 
@@ -70,11 +102,19 @@
     background-color: #381b01;
 }
 
+.ground-hover:hover {
+    background-color: #381b01;
+}
+
 .fighting {
     background-color: #4d012d;
 }
 
 .fighting-info {
+    background-color: #30001c;
+}
+
+.fighting-hover:hover {
     background-color: #30001c;
 }
 
@@ -86,11 +126,19 @@
     background-color: #640124;
 }
 
+.psychic-hover:hover {
+    background-color: #640124;
+}
+
 .rock {
     background-color: #826851;
 }
 
 .rock-info {
+    background-color: #64503e;
+}
+
+.rock-hover:hover {
     background-color: #64503e;
 }
 
@@ -102,11 +150,19 @@
     background-color: #355a61;
 }
 
+.ghost-hover:hover {
+    background-color: #355a61;
+}
+
 .flying {
     background-color: #6bb3bf;
 }
 
 .flying-info {
+    background-color: #518791;
+}
+
+.flying-hover:hover {
     background-color: #518791;
 }
 
@@ -118,11 +174,19 @@
     background-color: #2a2d2e;
 }
 
+.steel-hover:hover {
+    background-color: #2a2d2e;
+}
+
 .ice {
     background-color: #94efff;
 }
 
 .ice-info {
+    background-color: #5b96a0;
+}
+
+.ice-hover:hover {
     background-color: #5b96a0;
 }
 
@@ -134,6 +198,10 @@
     background-color: #1d0304;
 }
 
+.dragon-hover:hover {
+    background-color: #1d0304;
+}
+
 .dark {
     background-color: #0f0f0f;
 }
@@ -142,10 +210,18 @@
     background-color: #000000;
 }
 
+.dark-hover:hover {
+    background-color: #000000;
+}
+
 .stellar {
     background-color: #359689;
 }
 
 .stellar-info {
+    background-color: #266960;
+}
+
+.stellar-hover:hover {
     background-color: #266960;
 }

@@ -23,7 +23,6 @@ let pokemonAbilities;
 let pokemonStartAmount = 1;
 let pokemonAmount = 20;
 let pokemonIndex = 0;
-let json;
 
 function init() {
     getPokemonApi();
@@ -162,17 +161,58 @@ function showEvoChain(i) {
     evoChain[0].classList.add('underline');
     stats[0].classList.remove('underline');
     mainInfos[0].classList.remove('underline');
-    getEvolutionChain(i);
+    getFirstPokemonOfEvolutionChain(i);
 }
 
-async function getEvolutionChain(i) {
+async function getFirstPokemonOfEvolutionChain(i) {
     let pokemonSpecies = await fetch(pokemonArr[i].species.url);
     let pokemonSpeciesJson = await pokemonSpecies.json();
     let pokemonEvo = await fetch(pokemonSpeciesJson.evolution_chain.url);
     let pokemonEvoJson = await pokemonEvo.json();
-    let pokemonEvoImg = pokemonEvoJson.chain.species.name;
-    let imgUrl = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonEvoImg}/`);
-    json = await imgUrl.json();
-    console.log(json);
-    pokemonDetails[0].innerHTML = showEvoChainHtml(json);
+    let pokemonEvoName = pokemonEvoJson.chain.species.name;
+    let firstPokemonOfEvo = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonEvoName}/`);
+    let firstPokemonOfEvoJson = await firstPokemonOfEvo.json();
+    getSecondPokemonOfEvolutionChain(pokemonEvoJson, firstPokemonOfEvoJson);
+}
+
+async function getSecondPokemonOfEvolutionChain(pokemonEvoJson, firstPokemonOfEvoJson) {
+    let pathToSecondPokemon = pokemonEvoJson.chain.evolves_to;
+    if (pathToSecondPokemon.length > 0) {
+        let secondPokemonEvoName = pokemonEvoJson.chain.evolves_to[0].species.name;
+        let secondPokemonOfEvo = await fetch(`https://pokeapi.co/api/v2/pokemon/${secondPokemonEvoName}/`);
+        let secondPokemonOfEvoJson = await secondPokemonOfEvo.json();
+        getThirdPokemonOfEvolutionChain(pokemonEvoJson, firstPokemonOfEvoJson, secondPokemonOfEvoJson);
+    } else {
+        pokemonDetails[0].innerHTML = showEvoChainWithOnePokemon(firstPokemonOfEvoJson);
+    }
+}
+
+async function getThirdPokemonOfEvolutionChain(pokemonEvoJson, firstPokemonOfEvoJson, secondPokemonOfEvoJson) {
+    let pathToThirdPokemon = pokemonEvoJson.chain.evolves_to[0].evolves_to;
+    if (pathToThirdPokemon.length > 0) {
+        let thridPokemonEvoName = pokemonEvoJson.chain.evolves_to[0].evolves_to[0].species.name;
+        let thirdPokemonOfEvo = await fetch(`https://pokeapi.co/api/v2/pokemon/${thridPokemonEvoName}/`);
+        let thridPokemonOfEvoJson = await thirdPokemonOfEvo.json();
+        pokemonDetails[0].innerHTML = showEvoChainWithThreePokemon(firstPokemonOfEvoJson, secondPokemonOfEvoJson, thridPokemonOfEvoJson);
+    } else {
+        pokemonDetails[0].innerHTML = showEvoChainWithTwoPokemon(firstPokemonOfEvoJson, secondPokemonOfEvoJson);
+    }
+}
+
+function previousPokemon(i) {
+    if (i > 0) {
+        i--;
+        dialog.innerHTML = showClickedPokemon(i, weight);
+        getPokemonTypeForDialog(i);
+        getAbilityofPokemon(i);
+    }
+}
+
+function nextPokemon(i) {
+    if (i < pokemonAmount - 1) {
+        i++;
+        dialog.innerHTML = showClickedPokemon(i, weight);
+        getPokemonTypeForDialog(i);
+        getAbilityofPokemon(i);
+    }
 }
