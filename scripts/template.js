@@ -2,8 +2,10 @@ function showPokemon(pokemonArr, i) {
     return `
         <div onclick="openPokemonDialog(${i})" class="pokemon-card ${pokemonArr[i].types[0].type.name}">
             <h3>${pokemonArr[i].name.charAt(0).toUpperCase() + pokemonArr[i].name.slice(1)}</h3>
-            <img class="pokemon-img" src="${pokemonArr[i].sprites.other['official-artwork'].front_default}">
-            <div class="pokemon-type"></div>
+            <div class="pokemon-img-type">
+                <img class="pokemon-img" src="${pokemonArr[i].sprites.other['official-artwork'].front_default}">
+                <div class="pokemon-type"></div>
+            </div>
         </div>
     `;
     
@@ -20,8 +22,9 @@ function renderPokemonType(imgSrc) {
 function showClickedPokemon(i, weight) {
     return `
         <div class="pokemon-dialog ${pokemonArr[i].types[0].type.name}">
+        <div onclick="toggleOverlay()" class="x-mark-container ${pokemonArr[i].types[0].type.name}-hover"><img class="x-mark" src="./img/xmark-white.svg"></div>
             <h2>${pokemonArr[i].name.charAt(0).toUpperCase() + pokemonArr[i].name.slice(1)}</h2>
-            <img class="pokemon-img" src="${pokemonArr[i].sprites.other['official-artwork'].front_default}">
+            <img class="pokemon-img img-dialog" src="${pokemonArr[i].sprites.other['official-artwork'].front_default}">
             <div class="pokemon-type-dialog"></div>
             <div class="pokemon-info ${pokemonArr[i].types[0].type.name}-info">
                 <span onclick="showMainInfos(${i})" class="info main underline">main</span>

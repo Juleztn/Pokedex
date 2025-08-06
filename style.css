@@ -79,6 +79,7 @@
 
 .pokemon-type {
     display: flex;
+    justify-content: center;
     gap: 16px;
 }
 
@@ -96,7 +97,7 @@
 #dialog {
     margin: auto;
     position: fixed;
-    top: 20%;
+    top: 14%;
     z-index: 3;
     outline: none;
     border: none;
@@ -275,4 +276,9 @@
 
 .back-btn:hover {
     transform: scale(1.05);
+}
+
+.x-mark {
+    display: none;
+    cursor: pointer;
 }
