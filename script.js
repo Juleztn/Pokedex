@@ -208,22 +208,23 @@ async function getPokemonEvolutionChain(i) {
             break;
         }
     }
-
     pokemonArr[i].evolutionChain = evolutionChain;
 }
 
-async function previousPokemon(i) {
-    i--;
-    pokemonNameAndImage[0].innerHTML = changeNameAndImage(i);
-    await getPokemonTypeForDialog(i);
-    getAbilityofPokemon(i);
-    await getPokemonEvolutionChain(i);
+function previousPokemon(i) {
+    if (i > 0) {
+        i--;
+        dialog.innerHTML = showClickedPokemon(i, weight);
+        getPokemonTypeForDialog(i);
+        getAbilityofPokemon(i);
+    }
 }
 
-async function nextPokemon(i) {
-    i++;
-    pokemonNameAndImage[0].innerHTML = changeNameAndImage(i);
-    getPokemonTypeForDialog(i);
-    getAbilityofPokemon(i);
-    await getPokemonEvolutionChain(i);
+function nextPokemon(i) {
+    if (i < pokemonAmount - 1) {
+        i++;
+        dialog.innerHTML = showClickedPokemon(i, weight);
+        getPokemonTypeForDialog(i);
+        getAbilityofPokemon(i);
+    }
 }
