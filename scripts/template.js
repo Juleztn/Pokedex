@@ -23,8 +23,10 @@ function showClickedPokemon(i, weight) {
     return `
         <div class="pokemon-dialog ${pokemonArr[i].types[0].type.name}">
         <div onclick="toggleOverlay()" class="x-mark-container ${pokemonArr[i].types[0].type.name}-hover"><img class="x-mark" src="./img/xmark-white.svg"></div>
-            <h2>${pokemonArr[i].name.charAt(0).toUpperCase() + pokemonArr[i].name.slice(1)}</h2>
-            <img class="pokemon-img img-dialog" src="${pokemonArr[i].sprites.other['official-artwork'].front_default}">
+            <div class="pokemon-name-and-img">
+                <h2>${pokemonArr[i].name.charAt(0).toUpperCase() + pokemonArr[i].name.slice(1)}</h2>
+                <img class="pokemon-img img-dialog" src="${pokemonArr[i].sprites.other['official-artwork'].front_default}">
+            </div>
             <div class="pokemon-type-dialog"></div>
             <div class="pokemon-info ${pokemonArr[i].types[0].type.name}-info">
                 <span onclick="showMainInfos(${i})" class="info main underline">main</span>
@@ -52,9 +54,41 @@ function showClickedPokemon(i, weight) {
                 </div>
             </div>
             <div class="arrows">
-                <img onclick="previousPokemon(${i})" class="arrows-img ${pokemonArr[i].types[0].type.name}-hover" src="./img/angle-left-white.svg">
-                <img onclick="nextPokemon(${i})" class="arrows-img ${pokemonArr[i].types[0].type.name}-hover" src="./img/angle-right-white.svg">
+                <div class="left-arrow">
+                    <img onclick="previousPokemon(${i})" class="arrows-img ${pokemonArr[i].types[0].type.name}-hover" src="./img/angle-left-white.svg">
+                </div>
+                <div class="right-arrow">
+                    <img onclick="nextPokemon(${i})" class="arrows-img ${pokemonArr[i].types[0].type.name}-hover" src="./img/angle-right-white.svg">
+                </div>
             </div>
+        </div>
+    `;
+}
+
+function changeNameAndImage(i) {
+    return `
+        <h2>${pokemonArr[i].name.charAt(0).toUpperCase() + pokemonArr[i].name.slice(1)}</h2>
+        <img class="pokemon-img img-dialog" src="${pokemonArr[i].sprites.other['official-artwork'].front_default}">
+    `;
+}
+
+function changeMainInfo(i, weight) {
+    return `
+        <div class="single-info">
+                <span>Height:</span>
+                <span>${pokemonArr[i].height}0 cm</span>
+            </div>
+            <div class="single-info">
+                <span>Weight:</span>
+                <span>${weight}</span>
+            </div>
+            <div class="single-info">
+                <span>Base Experience:</span>
+                <span>${pokemonArr[i].base_experience}</span>
+            </div>
+            <div class="single-info">
+                <span>Abilities:</span>
+            <div class="abilities"></div>
         </div>
     `;
 }

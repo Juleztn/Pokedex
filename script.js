@@ -8,6 +8,8 @@ const loadingScreenRef = document.getElementById('loading-screen');
 const btn = document.getElementById('btn');
 const dialog = document.getElementById('dialog');
 const overlay = document.getElementById('overlay');
+let leftArrow = document.getElementsByClassName('left-arrow');
+let rightArrow = document.getElementsByClassName('right-arrow')
 let input = document.getElementById('search-input');
 let mainInfos = document.getElementsByClassName('main');
 let stats = document.getElementsByClassName('stats');
@@ -107,9 +109,16 @@ function openPokemonDialog(i) {
     dialog.show();
     getWeightOfPokemon(i);
     dialog.innerHTML = showClickedPokemon(i, weight);
+    if (i == 0) {
+        leftArrow[0].innerHTML = "";
+    } 
+    if (i == pokemonAmount - 1) {
+        rightArrow[0].innerHTML = "";
+    }
     overlay.classList.toggle('d_none');
     getPokemonTypeForDialog(i);
     getAbilityofPokemon(i);
+    getPokemonEvolutionChain(i);
 }
 
 function getWeightOfPokemon(i) {
@@ -161,58 +170,63 @@ function showEvoChain(i) {
     evoChain[0].classList.add('underline');
     stats[0].classList.remove('underline');
     mainInfos[0].classList.remove('underline');
-    getFirstPokemonOfEvolutionChain(i);
+    
+    const evolutionChain = pokemonArr[i].evolutionChain;
+    
+    switch(evolutionChain.length) {
+        case 1:
+            pokemonDetails[0].innerHTML = showEvoChainWithOnePokemon(evolutionChain[0]);
+            break;
+        case 2:
+            pokemonDetails[0].innerHTML = showEvoChainWithTwoPokemon(evolutionChain[0], evolutionChain[1]);
+            break;
+        case 3:
+            pokemonDetails[0].innerHTML = showEvoChainWithThreePokemon(evolutionChain[0], evolutionChain[1], evolutionChain[2]);
+            break;
+    }
 }
 
-async function getFirstPokemonOfEvolutionChain(i) {
+async function getPokemonEvolutionChain(i) {
     let pokemonSpecies = await fetch(pokemonArr[i].species.url);
     let pokemonSpeciesJson = await pokemonSpecies.json();
     let pokemonEvo = await fetch(pokemonSpeciesJson.evolution_chain.url);
     let pokemonEvoJson = await pokemonEvo.json();
-    let pokemonEvoName = pokemonEvoJson.chain.species.name;
-    let firstPokemonOfEvo = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonEvoName}/`);
-    let firstPokemonOfEvoJson = await firstPokemonOfEvo.json();
-    getSecondPokemonOfEvolutionChain(pokemonEvoJson, firstPokemonOfEvoJson);
-}
 
-async function getSecondPokemonOfEvolutionChain(pokemonEvoJson, firstPokemonOfEvoJson) {
-    let pathToSecondPokemon = pokemonEvoJson.chain.evolves_to;
-    if (pathToSecondPokemon.length > 0) {
-        let secondPokemonEvoName = pokemonEvoJson.chain.evolves_to[0].species.name;
-        let secondPokemonOfEvo = await fetch(`https://pokeapi.co/api/v2/pokemon/${secondPokemonEvoName}/`);
-        let secondPokemonOfEvoJson = await secondPokemonOfEvo.json();
-        getThirdPokemonOfEvolutionChain(pokemonEvoJson, firstPokemonOfEvoJson, secondPokemonOfEvoJson);
-    } else {
-        pokemonDetails[0].innerHTML = showEvoChainWithOnePokemon(firstPokemonOfEvoJson);
+    let evolutionChain = [];
+    let currentEvolution = pokemonEvoJson.chain;
+
+    while (currentEvolution) {
+        let pokemonName = currentEvolution.species.name;
+        let pokemonData = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`);
+        let pokemonJson = await pokemonData.json();
+        evolutionChain.push(pokemonJson);
+
+        if (currentEvolution.evolves_to.length > 0) {
+            currentEvolution = currentEvolution.evolves_to[0];
+        } else {
+            break;
+        }
     }
+    
+    pokemonArr[i].evolutionChain = evolutionChain;
 }
 
-async function getThirdPokemonOfEvolutionChain(pokemonEvoJson, firstPokemonOfEvoJson, secondPokemonOfEvoJson) {
-    let pathToThirdPokemon = pokemonEvoJson.chain.evolves_to[0].evolves_to;
-    if (pathToThirdPokemon.length > 0) {
-        let thridPokemonEvoName = pokemonEvoJson.chain.evolves_to[0].evolves_to[0].species.name;
-        let thirdPokemonOfEvo = await fetch(`https://pokeapi.co/api/v2/pokemon/${thridPokemonEvoName}/`);
-        let thridPokemonOfEvoJson = await thirdPokemonOfEvo.json();
-        pokemonDetails[0].innerHTML = showEvoChainWithThreePokemon(firstPokemonOfEvoJson, secondPokemonOfEvoJson, thridPokemonOfEvoJson);
-    } else {
-        pokemonDetails[0].innerHTML = showEvoChainWithTwoPokemon(firstPokemonOfEvoJson, secondPokemonOfEvoJson);
-    }
-}
-
-function previousPokemon(i) {
+async function previousPokemon(i) {
     if (i > 0) {
         i--;
         dialog.innerHTML = showClickedPokemon(i, weight);
         getPokemonTypeForDialog(i);
         getAbilityofPokemon(i);
+        await getPokemonEvolutionChain(i);
     }
 }
 
-function nextPokemon(i) {
+async function nextPokemon(i) {
     if (i < pokemonAmount - 1) {
         i++;
         dialog.innerHTML = showClickedPokemon(i, weight);
         getPokemonTypeForDialog(i);
         getAbilityofPokemon(i);
+        await getPokemonEvolutionChain(i);
     }
 }
