@@ -15,6 +15,7 @@ let mainInfos = document.getElementsByClassName('main');
 let stats = document.getElementsByClassName('stats');
 let evoChain = document.getElementsByClassName('evo-chain');
 let pokemonDetails = document.getElementsByClassName('pokemon-details');
+let pokemonNameAndImage = document.getElementsByClassName('pokemon-name-and-img');
 let pokemonArr = [];
 let pokemonNames = [];
 let pokemonJson;
@@ -111,7 +112,7 @@ function openPokemonDialog(i) {
     dialog.innerHTML = showClickedPokemon(i, weight);
     if (i == 0) {
         leftArrow[0].innerHTML = "";
-    } 
+    }
     if (i == pokemonAmount - 1) {
         rightArrow[0].innerHTML = "";
     }
@@ -170,10 +171,10 @@ function showEvoChain(i) {
     evoChain[0].classList.add('underline');
     stats[0].classList.remove('underline');
     mainInfos[0].classList.remove('underline');
-    
+
     const evolutionChain = pokemonArr[i].evolutionChain;
-    
-    switch(evolutionChain.length) {
+
+    switch (evolutionChain.length) {
         case 1:
             pokemonDetails[0].innerHTML = showEvoChainWithOnePokemon(evolutionChain[0]);
             break;
@@ -207,26 +208,22 @@ async function getPokemonEvolutionChain(i) {
             break;
         }
     }
-    
+
     pokemonArr[i].evolutionChain = evolutionChain;
 }
 
 async function previousPokemon(i) {
-    if (i > 0) {
-        i--;
-        dialog.innerHTML = showClickedPokemon(i, weight);
-        getPokemonTypeForDialog(i);
-        getAbilityofPokemon(i);
-        await getPokemonEvolutionChain(i);
-    }
+    i--;
+    pokemonNameAndImage[0].innerHTML = changeNameAndImage(i);
+    await getPokemonTypeForDialog(i);
+    getAbilityofPokemon(i);
+    await getPokemonEvolutionChain(i);
 }
 
 async function nextPokemon(i) {
-    if (i < pokemonAmount - 1) {
-        i++;
-        dialog.innerHTML = showClickedPokemon(i, weight);
-        getPokemonTypeForDialog(i);
-        getAbilityofPokemon(i);
-        await getPokemonEvolutionChain(i);
-    }
+    i++;
+    pokemonNameAndImage[0].innerHTML = changeNameAndImage(i);
+    getPokemonTypeForDialog(i);
+    getAbilityofPokemon(i);
+    await getPokemonEvolutionChain(i);
 }

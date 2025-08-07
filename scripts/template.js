@@ -8,7 +8,6 @@ function showPokemon(pokemonArr, i) {
             </div>
         </div>
     `;
-    
 }
 
 function renderPokemonType(imgSrc) {
