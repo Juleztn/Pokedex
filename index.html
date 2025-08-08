@@ -22,9 +22,12 @@
             <img class="pokeball" src="./img/pokeball.png" alt="Pokeball">
             <h1>Pokedex</h1>
         </div>
-        <div class="search-pokemon">
-            <img class="search" src="./img/lupe.svg" alt="Lupe">
-            <input id="search-input" onkeyup="filterPokemon()" type="text" placeholder="Search for Pokemon">
+        <div class="search-for-pokemon">
+            <div class="search-pokemon">
+                <img onclick="filterPokemon()" class="search" src="./img/lupe.svg" alt="Lupe">
+                <input id="search-input" type="text" placeholder="Search for Pokemon">
+            </div>
+            <span id="alert" class="d_none">Please write 3 letters or more</span>
         </div>
     </header>
 
@@ -32,7 +35,7 @@
         <div id="pokemon">
 
         </div>
-        <div id="loading-screen" class="d_none"> 
+        <div id="loading-screen" class="d_none">
             <img class="loading-gif" src="./img/loading.gif">
         </div>
         <div class="loading-button">

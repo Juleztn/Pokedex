@@ -18,6 +18,7 @@ let pokemonDetails = document.getElementsByClassName('pokemon-details');
 let pokemonNameAndImage = document.getElementsByClassName('pokemon-name-and-img');
 let pokemonArr = [];
 let pokemonNames = [];
+let pokemonFilteredArr = [];
 let pokemonJson;
 let pokemonTypeJson;
 let pokemonTypeJsonDialog;
@@ -26,6 +27,7 @@ let pokemonAbilities;
 let pokemonStartAmount = 1;
 let pokemonAmount = 20;
 let pokemonIndex = 0;
+let isFilter = false;
 
 function init() {
     getPokemonApi();
@@ -76,14 +78,22 @@ function hideLoadingScreen() {
 }
 
 function filterPokemon() {
+    isFilter = true;
+    let alert = document.getElementById('alert');
     if (input.value.length >= 3) {
+        alert.classList.add('d_none');
         filterAndShowPokemon();
     } else if (input.value == "") {
+        alert.classList.add('d_none');
         showAllPokemon();
+    } else if (input.value.length > 0 && input.value.length < 3) {
+        alert.classList.remove('d_none');
+        isFilter = false;
     }
 }
 
 function filterAndShowPokemon() {
+    pokemonFilteredArr = [];
     let filter, a, txtValue;
     filter = input.value.toUpperCase();
     for (let i = 0; i < pokemonNames.length; i++) {
@@ -91,8 +101,11 @@ function filterAndShowPokemon() {
         txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             pokemonCards[i].style.display = "";
+            pokemonFilteredArr.push(pokemonCards[i]);
+            console.log(pokemonFilteredArr);
         } else {
             pokemonCards[i].style.display = "none";
+            isFilter = false;
         }
     }
     btn.classList.add('d_none');
@@ -120,6 +133,11 @@ function openPokemonDialog(i) {
     getPokemonTypeForDialog(i);
     getAbilityofPokemon(i);
     getPokemonEvolutionChain(i);
+
+    if (!isFilter) {
+        console.log('test');
+        
+    }
 }
 
 function getWeightOfPokemon(i) {

@@ -4,8 +4,16 @@
     gap: 16px;
 }
 
+.search-for-pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
 .search {
     width: 28px;
+    cursor: pointer;
 }
 
 .search-pokemon {
@@ -17,6 +25,8 @@
 .pokemon {
     padding: 32px 40px;
     min-height: calc(100vh - 288px);
+    max-width: 1920px;
+    margin: auto;
 }
 
 #pokemon {
