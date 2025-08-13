@@ -1,3 +1,9 @@
+@media(max-width: 1920px) {
+    .header-content {
+        padding: 0;
+    }
+}
+
 @media(max-width: 830px) {
     .pokemon-card {
         width: 100px;
