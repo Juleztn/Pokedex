@@ -303,3 +303,8 @@
     align-items: center;
     height: 177px;
 }
+
+#alert {
+    position: absolute;
+    top: 80px;
+}
